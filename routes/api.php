@@ -30,4 +30,6 @@ Route::post('/user', function(Request $request) {
     return Auth::user();
 })->middleware('auth:api');
 
+//evnet
+Route::get('/event/list', [EventController::class, 'index']);
 Route::post('/event/store', [EventController::class, 'store']);
