@@ -19,6 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\Api\AuthController;
- 
+use Facade\FlareClient\Api;
+use Illuminate\Support\Facades\Auth;
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+// Route::get('/user', [AuthController::class, 'user_info']);
+Route::post('/user', function(Request $request) {
+    return Auth::user();
+})->middleware('auth:api');

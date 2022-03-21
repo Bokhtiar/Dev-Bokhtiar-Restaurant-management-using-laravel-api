@@ -16,8 +16,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //https://github.com/fruitcake/laravel-cors this link is cros port enable
     public function login(Request $request)
     {
+
         if(Auth::attempt($request->only('email', 'password'))){
             $user = Auth::user();
             $token = $user->createToken('app')->accessToken;
@@ -50,64 +52,18 @@ class AuthController extends Controller
 
         return response([
             'message'=> 'successfully registration',
-            'token'=>$token,
+            'token'=>$token->token,
             'user'=>$user
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function user_info()
     {
-        //
+        $user = Auth::user();
+        return response([
+            'user'=>$user,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
