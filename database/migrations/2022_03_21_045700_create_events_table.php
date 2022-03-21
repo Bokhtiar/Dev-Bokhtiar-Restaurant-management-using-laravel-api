@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             $table->string('image')->nullable();
             $table->integer('price');
             $table->longText('description');
-            $table->integer('status')->defoult(0);
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

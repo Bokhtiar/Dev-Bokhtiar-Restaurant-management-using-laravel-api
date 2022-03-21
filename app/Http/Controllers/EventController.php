@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -34,7 +36,38 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated = $request->validate([
+          'title'=>' string |required | max:30 | min:2 ',
+          'description'=>'required',
+          'price'=>'required',
+      ]);
+
+      if($validated){
+          try{
+              DB::beginTransaction();
+              $event = Event::create([
+                  'title' => $request->title,
+                  'description' => $request->description,
+                  'price' => $request->price,
+                  'image'=>"not image",
+              ]);
+
+              if (!empty($event)) {
+                  DB::commit();
+                return response()->json([
+                  'message'=> 'event Create Successfully',
+                  'events' => $event,
+                  'status' => 200,
+                ]);
+              }
+              throw new \Exception('Invalid About Information');
+          }catch(\Exception $ex){
+              DB::rollBack();
+              return response()->json([
+                'message'=> $ex,
+              ]);
+          }
+      }
     }
 
     /**

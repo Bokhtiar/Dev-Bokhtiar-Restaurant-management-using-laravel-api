@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\EventController;
 use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,3 +29,5 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/user', function(Request $request) {
     return Auth::user();
 })->middleware('auth:api');
+
+Route::post('/event/store', [EventController::class, 'store']);
