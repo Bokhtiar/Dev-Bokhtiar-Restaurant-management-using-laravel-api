@@ -17,13 +17,12 @@ class EventController extends Controller
     {
         $events = Event::where('status', 1)->get();
           if($events){
-            return response()->json([
+            return response([
               'message'=> 'Active Event List',
-              'events' => $events,
-              'status' => 200,
+              'event' => $events,
             ]);
           }else{
-            return response()->json([
+            return response([
               'message'=> 'data not found',
               'status' => 404,
             ]);
