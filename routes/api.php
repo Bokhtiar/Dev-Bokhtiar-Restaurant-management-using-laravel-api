@@ -19,7 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\EventController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\BookingController;
 use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,3 +34,5 @@ Route::post('/user', function(Request $request) {
 //evnet
 Route::get('/event/list', [EventController::class, 'index']);
 Route::post('/event/store', [EventController::class, 'store']);
+//booking
+Route::post('/booking/store', [BookingController::class, 'store']);
