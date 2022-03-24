@@ -13,9 +13,14 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list(Request $request , $id=null)
     {
-        //
+        $carts = Cart::where('user_id', $request->id)->where('order_id', null)->get();
+        return response([
+          'message'=> 'Cart List',
+          'carts' => $carts,
+          'status'=>200,
+        ]);
     }
 
     /**
@@ -90,8 +95,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( Request $request, $id=null)
     {
-        //
+        $carts = Cart::find($request->id)->delete();
+        return response([
+          'message'=>'cart remove item done',
+          'carts' => $carts,
+          'status'=> 200,
+        ]);
     }
 }

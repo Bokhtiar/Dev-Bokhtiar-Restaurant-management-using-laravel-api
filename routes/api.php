@@ -47,3 +47,5 @@ Route::get('/product/list', [ProductController::class, 'index']);
 Route::get('/category/product/{id?}', [ProductController::class, 'category_product']);
 //card
 Route::post('/cart/store', [CartController::class, 'store']);
+Route::get('/cart/list/{id?}', [CartController::class, 'list']);
+Route::get('/cart/delete/{id?}', [CartController::class, 'destroy']);
