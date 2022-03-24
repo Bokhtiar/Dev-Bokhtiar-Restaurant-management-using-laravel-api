@@ -59,10 +59,7 @@ class AuthController extends Controller
 
     public function user_info()
     {
-        $user = Auth::user();
-        return response([
-            'user'=>$user,
-        ]);
+        return response()->json(['authenticated-user' => auth()->user()], 200);
     }
 
 

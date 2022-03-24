@@ -22,15 +22,17 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Auth;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
-// Route::get('/user', [AuthController::class, 'user_info']);
-Route::post('/user', function(Request $request) {
-    return Auth::user();
-})->middleware('auth:api');
+
+Route::middleware('auth:api')->group(function(){
+Route::post('user', [AuthController::class, 'user_info']);
+});
+
 
 //evnet
 Route::get('/event/list', [EventController::class, 'index']);
@@ -39,3 +41,6 @@ Route::post('/event/store', [EventController::class, 'store']);
 Route::post('/booking/store', [BookingController::class, 'store']);
 //category
 Route::get('/category/list', [CategoryController::class, 'index']);
+//product
+Route::get('/product/list', [ProductController::class, 'index']);
+Route::get('/category/product/{id?}', [ProductController::class, 'category_product']);
