@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\CategoryController;
@@ -44,3 +45,5 @@ Route::get('/category/list', [CategoryController::class, 'index']);
 //product
 Route::get('/product/list', [ProductController::class, 'index']);
 Route::get('/category/product/{id?}', [ProductController::class, 'category_product']);
+//card
+Route::post('/cart/store', [CartController::class, 'store']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cart;
 
 class CartController extends Controller
 {
@@ -35,7 +36,18 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = new Cart();
+        $cart->user_id = $request->user_id;
+        $cart->product_id = $request->product_id;
+        $cart->quantity = $request->quantity;
+        $cart->save();
+
+        $carts = Cart::where('user_id', $request->user_id)->where('order_id', null)->get();
+        return response([
+          'message' => 'cart added successfully',
+          'carts' => $carts,
+          'status' => 200,
+        ]);
     }
 
     /**
