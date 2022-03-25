@@ -13,7 +13,7 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list(Request $request , $id=null)
+    public function list(Request $request, $id=null)
     {
         $carts = Cart::where('user_id', $request->id)->where('order_id', null)->get();
         return response([
