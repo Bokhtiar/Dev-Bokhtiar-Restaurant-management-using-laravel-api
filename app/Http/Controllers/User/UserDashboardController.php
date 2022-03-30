@@ -9,6 +9,6 @@ class UserDashboardController extends Controller
 {
     public function index()
     {
-        return "admin dashboard";
+        return "user dashboard";
     }
 }
