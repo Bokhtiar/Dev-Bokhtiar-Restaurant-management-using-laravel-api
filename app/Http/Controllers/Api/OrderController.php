@@ -41,6 +41,8 @@ class OrderController extends Controller
 
 
 
+
+
     public function store(Request $request)
     {
           if (User::where('email', $request->email)->where('id', $request->user_id)->exists()) {
@@ -58,12 +60,10 @@ class OrderController extends Controller
           $order->message = $request->message;
             $order->save();
 
+            //$carts=Cart::where('user_id', $request->user_id)->where('order_id',NULL)->get();
 
-
-           foreach (Cart::where('user_id', $request->user_id)
-                   ->where('order_id',NULL)
-                   ->get() as $cart) {
-            $cart['order_id']=$order->order_id;
+           foreach (Cart::where('user_id', $request->user_id)->where('order_id',NULL)->get() as $cart) {
+            $cart->order_id = $order->id;
             $cart->save();
           }
           return response([
