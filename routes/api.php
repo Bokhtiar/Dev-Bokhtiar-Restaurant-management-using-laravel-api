@@ -24,6 +24,8 @@ use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\OrderController;
+
 use Facade\FlareClient\Api;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,3 +51,4 @@ Route::get('/category/product/{id?}', [ProductController::class, 'category_produ
 Route::post('/cart/store', [CartController::class, 'store']);
 Route::get('/cart/list/{id?}', [CartController::class, 'list']);
 Route::get('/cart/delete/{id?}', [CartController::class, 'destroy']);
+Route::post('/order/store', [OrderController::class, 'store']);
