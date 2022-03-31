@@ -8,7 +8,7 @@ use App\Models\Product;
 use App\Models\User;
 
 class Cart extends Model
-{
+{  
     use HasFactory;
     protected $table='carts';
     protected $primaryKey='cart_id';
