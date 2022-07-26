@@ -19,19 +19,17 @@ class AuthController extends Controller
      //https://github.com/fruitcake/laravel-cors this link is cros port enable
     public function login(Request $request)
     {
-
         if(Auth::attempt($request->only('email', 'password'))){
             $user = Auth::user();
             $token = $user->createToken('app')->accessToken;
 
             return response([
                 'message'=>'successfully login',
-                'token'=>$token->token,
-                'user'=>$user
+                'token'=>$token,
             ]);
         }else{
             return response([
-                'message'=>'successfully not login',
+                'message'=>'Something Went Wrong..!',
             ]);
         }
     }
@@ -52,8 +50,7 @@ class AuthController extends Controller
 
         return response([
             'message'=> 'successfully registration',
-            'token'=>$token->token,
-            'user'=>$user
+            'token'=>$token,
         ]);
     }
 
